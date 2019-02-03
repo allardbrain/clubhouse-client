@@ -1,4 +1,4 @@
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 
 import logging
 from os import path
@@ -7,7 +7,8 @@ from urllib.parse import urlparse
 
 import requests
 
-API_ENDPOINT = 'https://api.clubhouse.io/api/v2'
+ENDPOINT_HOST = 'https://api.clubhouse.io'
+ENDPOINT_PATH = '/api/v2'
 
 ClubhouseStory = Dict[str, object]
 ClubhouseUser = Dict[str, object]
@@ -24,6 +25,14 @@ class ClubhouseClient(object):
         self.ignored_status_codes = ignored_status_codes or []
         self.api_key = api_key
 
+    def search_stories(self, **kwargs):
+        result = self._request('get', 'search', 'stories', json=kwargs)
+        items = result['data']
+        while 'next' in result and result['next']:
+            result = self._request('get', result['next'])
+            items = [*items, *result['data']]
+        return items
+
     def get(self, *segments, **kwargs):
         return self._request('get', *segments, **kwargs)
 
@@ -37,8 +46,12 @@ class ClubhouseClient(object):
         return self._request('delete', *segments, **kwargs)
 
     def _request(self, method, *segments, **kwargs):
-        url = path.join(API_ENDPOINT, *[str(s) for s in segments])
+        if not segments[0].startswith(ENDPOINT_PATH):
+            segments = [ENDPOINT_PATH, *segments]
+
+        url = path.join(ENDPOINT_HOST, *[str(s).strip("/") for s in segments])
         prefix = "&" if urlparse(url)[4] else "?"
+
         response = requests.request(method, url + f"{prefix}token={self.api_key}", **kwargs)
         if response.status_code > 299 and response.status_code not in self.ignored_status_codes:
             logger.error(f"Status code: {response.status_code}, Content: {response.text}")
