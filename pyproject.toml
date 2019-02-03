@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "clubhouse"
+version = "0.1.1"
+license = "Apache-2.0"
+description = "Client for the Clubhouse API"
+authors = ["Jean-Martin Archer <jm@jmartin.ca>"]
+readme = "README.md"
+repository = "https://github.com/j-martin/clubhouse-client"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+requests = "^2.21"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
