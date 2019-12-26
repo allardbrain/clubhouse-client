@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 import requests
 
 ENDPOINT_HOST = 'https://api.clubhouse.io'
-ENDPOINT_PATH = '/api/v2'
+ENDPOINT_PATH = '/api/v3'
 
 ClubhouseStory = Dict[str, object]
 ClubhouseUser = Dict[str, object]
