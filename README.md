@@ -16,7 +16,4 @@ Refer to [Clubhouse API Docs](https://clubhouse.io/api/rest/v2/) for more inform
 from clubhouse import ClubhouseClient
 
 clubhouse = ClubhouseClient('your api key')
-
-story = {'name': 'A new story', 'description': 'Do something!'}
-clubhouse.post('stories', json=story)
 ```

@@ -25,14 +25,6 @@ class ClubhouseClient(object):
         self.ignored_status_codes = ignored_status_codes or []
         self.api_key = api_key
 
-    def search_stories(self, **kwargs):
-        result = self._request("get", "search", "stories", json=kwargs)
-        items = result["data"]
-        while "next" in result and result["next"]:
-            result = self._request("get", result["next"])
-            items = [*items, *result["data"]]
-        return items
-
     def get(self, *segments, **kwargs):
         return self._request("get", *segments, **kwargs)
 
