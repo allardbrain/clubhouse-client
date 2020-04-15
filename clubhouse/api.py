@@ -1,5 +1,3 @@
-__version__ = "0.3.0"
-
 import json
 import logging
 from os import path
@@ -67,10 +65,13 @@ class ClubhouseClient(object):
 
         return response
 
-    def list_milestones(self):
-        result = self._request("get", "milestones")
-        milestones = result.json()
+    def _list_items(self, method, *segments, **kwargs):
+        result = self._request(method, *segments, **kwargs)
+        items = result.json()
         while result.next:
-            result = self._request("get", result.next)
-            milestones.extend(result.json())
-        return milestones
+            result = self._request(method, result.next)
+            items.extend(result.json())
+        return items
+
+    def list_milestones(self):
+        return self._list_items("get", "milestones")
