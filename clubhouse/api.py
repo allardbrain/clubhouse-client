@@ -87,5 +87,14 @@ class ClubhouseClient(object):
             items.extend(result.json())
         return items
 
-    def list_milestones(self):
-        return self._list_items("get", "milestones")
+    ################
+    #  Milestones  #
+    ################
+
+    def create_milestone(self, data, **kwargs):
+        segments = ["milestones"]
+        return self._create_item("post", data, *segments, **kwargs)
+
+    def list_milestones(self, **kwargs):
+        segments = ["milestones"]
+        return self._list_items("get", *segments, **kwargs)
