@@ -99,8 +99,8 @@ class ClubhouseClient(object):
 
         Example:
             from clubhouse import ClubhouseClient
-            c = ClubhouseClient(API_KEY)
-            c.create_milestone({'name': 'TEST'})
+            conn = ClubhouseClient(API_KEY)
+            conn.create_milestone({'name': 'TEST'})
 
         Args:
             data (dict): Can contain any of the body parameters listed in the
@@ -117,8 +117,8 @@ class ClubhouseClient(object):
 
         Example:
             from clubhouse import ClubhouseClient
-            c = ClubhouseClient(API_KEY)
-            c.list_milestones()
+            conn = ClubhouseClient(API_KEY)
+            conn.list_milestones()
 
         Returns:
             A list of dictionaries, where each dictionary is one Milestone.
