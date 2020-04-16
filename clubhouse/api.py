@@ -71,11 +71,19 @@ class ClubhouseClient(object):
 
         return response
 
+    #############
+    #  Actions  #
+    #############
+
+    def _create_item(self, method, data, *segments, **kwargs):
+        result = self._request(method, data, *segments, **kwargs)
+        return result.json()
+
     def _list_items(self, method, *segments, **kwargs):
-        result = self._request(method, *segments, **kwargs)
+        result = self._request(method, None, *segments, **kwargs)
         items = result.json()
         while result.next:
-            result = self._request(method, result.next)
+            result = self._request(method, None, result.next, **kwargs)
             items.extend(result.json())
         return items
 
