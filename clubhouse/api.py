@@ -74,6 +74,18 @@ class ClubhouseClient(object):
         result = self._request(method, data, *segments, **kwargs)
         return result.json()
 
+    def _get_item(self, method, *segments, **kwargs):
+        '''An internal helper method for calling any "Get"-related endpoint.
+
+        Args:
+            method (str): Must be "get", "post", "put" or "delete"
+            id (int): The requested item's ID
+        Returns:
+            A JSON object containing information about the requested item
+        '''
+        result = self._request(method, None, *segments, **kwargs)
+        return result.json()
+
     def _list_items(self, method, *segments, **kwargs):
         '''An internal helper method for calling any "List"-related endpoint.
 
@@ -93,7 +105,7 @@ class ClubhouseClient(object):
     #  Milestones  #
     ################
 
-    def create_milestone(self, data, **kwargs):
+    def create_milestone(self, id, **kwargs):
         '''Create a Milestone.
         https://clubhouse.io/api/rest/v3/#Create-Milestone
 
@@ -110,6 +122,24 @@ class ClubhouseClient(object):
         '''
         segments = ["milestones"]
         return self._create_item("post", data, *segments, **kwargs)
+
+    def get_milestone(self, id, **kwargs):
+        '''Retrieve a specific Milestone.
+        https://clubhouse.io/api/rest/v3/#Get-Milestone
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.get_milestone(123)
+
+        Args:
+            id (int): The Milestone ID
+
+        Returns:
+            A JSON object containing information about the requested Milestone.
+        '''
+        segments = ["milestones", id]
+        return self._get_item("get", *segments, **kwargs)
 
     def list_milestones(self, **kwargs):
         '''List all Milestones.
