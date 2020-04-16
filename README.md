@@ -1,19 +1,19 @@
 # clubhouse-client
-Python client for Clubhouse
+A python wrapper for the Clubhouse API
 
 ## Installation
-
-The package is available on [pypi](https://pypi.org/project/clubhouse/) and can
-be installed like any other packages.
+This package is available on [pypi](https://pypi.org/project/clubhouse/) and can
+be installed like any other package:
 
     $ pip install clubhouse
 
 ## Usage
 
-Refer to [Clubhouse API Docs](https://clubhouse.io/api/rest/v2/) for more information.
+Refer to the [Clubhouse API Docs](https://clubhouse.io/api/rest/v3/) for information on required and optional parameters for each endpoint.
 
 ```python
 from clubhouse import ClubhouseClient
 
-clubhouse = ClubhouseClient('your api key')
+conn = ClubhouseClient('your api key')
+conn.list_milestones()
 ```
