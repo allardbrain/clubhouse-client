@@ -41,6 +41,16 @@ class ClubhouseClient(object):
         return self._request("put", *segments, **kwargs)
 
     def _request(self, method, data=None, *segments, **kwargs):
+        '''An internal helper method for calling any endpoint.
+
+        Args:
+            method (str): Must be "get", "post", "put" or "delete"
+            data (dict): Can contain any of the body parameters listed in the
+                API reference for the endpoint. Defaults to None.
+        Returns:
+            A response object
+        '''
+
         if not segments[0].startswith(ENDPOINT_PATH):
             segments = [ENDPOINT_PATH, *segments]
 
@@ -76,10 +86,26 @@ class ClubhouseClient(object):
     #############
 
     def _create_item(self, method, data, *segments, **kwargs):
+        '''An internal helper method for calling any "Create"-related endpoint.
+
+        Args:
+            method (str): Must be "get", "post", "put" or "delete"
+            data (dict): Can contain any of the body parameters listed in the
+                API reference for the endpoint.
+        Returns:
+            A JSON object containing information about the new item
+        '''
         result = self._request(method, data, *segments, **kwargs)
         return result.json()
 
     def _list_items(self, method, *segments, **kwargs):
+        '''An internal helper method for calling any "List"-related endpoint.
+
+        Args:
+            method (str): Must be "get"
+        Returns:
+            A list of dictionaries, where each dictionary is one item
+        '''
         result = self._request(method, None, *segments, **kwargs)
         items = result.json()
         while result.next:
@@ -92,9 +118,34 @@ class ClubhouseClient(object):
     ################
 
     def create_milestone(self, data, **kwargs):
+        '''Create a Milestone.
+        https://clubhouse.io/api/rest/v3/#Create-Milestone
+
+        Example:
+            from clubhouse import ClubhouseClient
+            c = ClubhouseClient(API_KEY)
+            c.create_milestone({'name': 'TEST'})
+
+        Args:
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+        Returns:
+            A JSON object containing information about the new Milestone.
+        '''
         segments = ["milestones"]
         return self._create_item("post", data, *segments, **kwargs)
 
     def list_milestones(self, **kwargs):
+        '''List all Milestones.
+        https://clubhouse.io/api/rest/v3/#List-Milestones
+
+        Example:
+            from clubhouse import ClubhouseClient
+            c = ClubhouseClient(API_KEY)
+            c.list_milestones()
+
+        Returns:
+            A list of dictionaries, where each dictionary is one Milestone.
+        '''
         segments = ["milestones"]
         return self._list_items("get", *segments, **kwargs)
