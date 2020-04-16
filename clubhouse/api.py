@@ -24,6 +24,13 @@ class ClubhouseClient(object):
         self.ignored_status_codes = ignored_status_codes or []
         self.api_key = api_key
 
+    ##################
+    #  HTTP methods  #
+    ##################
+
+    def delete(self, *segments, **kwargs):
+        return self._request("delete", *segments, **kwargs)
+
     def get(self, *segments, **kwargs):
         return self._request("get", *segments, **kwargs)
 
