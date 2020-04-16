@@ -40,10 +40,7 @@ class ClubhouseClient(object):
     def put(self, *segments, **kwargs):
         return self._request("put", *segments, **kwargs)
 
-    def delete(self, *segments, **kwargs):
-        return self._request("delete", *segments, **kwargs)
-
-    def _request(self, method, *segments, **kwargs):
+    def _request(self, method, data=None, *segments, **kwargs):
         if not segments[0].startswith(ENDPOINT_PATH):
             segments = [ENDPOINT_PATH, *segments]
 
@@ -54,10 +51,12 @@ class ClubhouseClient(object):
         prefix = "&" if urlparse(url)[4] else "?"
 
         headers = {"Content-Type": "application/json"}
+        data = json.dumps(data)
 
+        # https://requests.readthedocs.io/en/master/api/#requests.request
         response = requests.request(
-            method, url + f"{prefix}token={self.api_key}", **kwargs,
-            headers=headers
+            method, url + f"{prefix}token={self.api_key}", headers=headers,
+            data=data, **kwargs
         )
         if (
             response.status_code > 299
