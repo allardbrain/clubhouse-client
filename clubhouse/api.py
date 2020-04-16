@@ -101,6 +101,18 @@ class ClubhouseClient(object):
             items.extend(result.json())
         return items
 
+    def _update_item(self, data, *segments, **kwargs):
+        '''An internal helper method for calling any "Update"-related endpoint.
+
+        Args:
+            data (dict): Can contain any of the body parameters listed in the
+                API reference for the endpoint.
+        Returns:
+            A JSON object containing information about the updated item
+        '''
+        result = self._request("put", data, *segments, **kwargs)
+        return result.json()
+
     ################
     #  Milestones  #
     ################
@@ -155,3 +167,23 @@ class ClubhouseClient(object):
         '''
         segments = ["milestones"]
         return self._list_items("get", *segments, **kwargs)
+
+    def update_milestone(self, id, data, **kwargs):
+        '''Update a specific Milestone.
+        https://clubhouse.io/api/rest/v3/#Update-Milestone
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.update_milestone(123)
+
+        Args:
+            id (int): The Milestone ID
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the updated Milestone.
+        '''
+        segments = ["milestones", id]
+        return self._update_item(data, *segments, **kwargs)
