@@ -61,7 +61,7 @@ class ClubhouseClient(object):
     #  Actions  #
     #############
 
-    def _create_item(self, method, data, *segments, **kwargs):
+    def _create_item(self, data, *segments, **kwargs):
         '''An internal helper method for calling any "Create"-related endpoint.
 
         Args:
@@ -71,7 +71,7 @@ class ClubhouseClient(object):
         Returns:
             A JSON object containing information about the new item
         '''
-        result = self._request(method, data, *segments, **kwargs)
+        result = self._request("post", data, *segments, **kwargs)
         return result.json()
 
     def _get_item(self, method, *segments, **kwargs):
@@ -83,10 +83,10 @@ class ClubhouseClient(object):
         Returns:
             A JSON object containing information about the requested item
         '''
-        result = self._request(method, None, *segments, **kwargs)
+        result = self._request("get", None, *segments, **kwargs)
         return result.json()
 
-    def _list_items(self, method, *segments, **kwargs):
+    def _list_items(self, *segments, **kwargs):
         '''An internal helper method for calling any "List"-related endpoint.
 
         Args:
@@ -94,10 +94,10 @@ class ClubhouseClient(object):
         Returns:
             A list of dictionaries, where each dictionary is one item
         '''
-        result = self._request(method, None, *segments, **kwargs)
+        result = self._request("get", None, *segments, **kwargs)
         items = result.json()
         while result.next:
-            result = self._request(method, None, result.next, **kwargs)
+            result = self._request("get", None, result.next, **kwargs)
             items.extend(result.json())
         return items
 
@@ -117,7 +117,7 @@ class ClubhouseClient(object):
     #  Milestones  #
     ################
 
-    def create_milestone(self, id, **kwargs):
+    def create_milestone(self, data, **kwargs):
         '''Create a Milestone.
         https://clubhouse.io/api/rest/v3/#Create-Milestone
 
@@ -133,7 +133,25 @@ class ClubhouseClient(object):
             A JSON object containing information about the new Milestone.
         '''
         segments = ["milestones"]
-        return self._create_item("post", data, *segments, **kwargs)
+        return self._create_item(data, *segments, **kwargs)
+
+    def delete_milestone(self, id, **kwargs):
+        '''Delete a specific Milestone.
+        https://clubhouse.io/api/rest/v3/#Delete-Milestone
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.delete_milestone(123)
+
+        Args:
+            id (int): The Milestone ID
+
+        Returns:
+            An empty dictionary
+        '''
+        segments = ["milestones", id]
+        return self._delete_item(*segments, **kwargs)
 
     def get_milestone(self, id, **kwargs):
         '''Retrieve a specific Milestone.
@@ -166,7 +184,7 @@ class ClubhouseClient(object):
             A list of dictionaries, where each dictionary is one Milestone.
         '''
         segments = ["milestones"]
-        return self._list_items("get", *segments, **kwargs)
+        return self._list_items(*segments, **kwargs)
 
     def update_milestone(self, id, data, **kwargs):
         '''Update a specific Milestone.
