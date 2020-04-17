@@ -74,7 +74,16 @@ class ClubhouseClient(object):
         result = self._request("post", data, *segments, **kwargs)
         return result.json()
 
-    def _get_item(self, method, *segments, **kwargs):
+    def _delete_item(self, *segments, **kwargs):
+        '''An internal helper method for calling any "Delete"-related endpoint.
+
+        Returns:
+            A JSON object containing information about the updated item
+        '''
+        result = self._request("delete", None, *segments, **kwargs)
+        return result
+
+    def _get_item(self, *segments, **kwargs):
         '''An internal helper method for calling any "Get"-related endpoint.
 
         Args:
@@ -169,7 +178,23 @@ class ClubhouseClient(object):
             A JSON object containing information about the requested Milestone.
         '''
         segments = ["milestones", id]
-        return self._get_item("get", *segments, **kwargs)
+        return self._get_item(*segments, **kwargs)
+
+    def list_milestone_epics(self, id, **kwargs):
+        '''List all Milestone Epics.
+        https://clubhouse.io/api/rest/v3/#List-Milestone-Epics
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.list_milestone_epics(123)
+
+        Returns:
+            A list of dictionaries, where each dictionary is one Epic of the
+            requested Milestone.
+        '''
+        segments = ["milestones", id, "epics"]
+        return self._list_items(*segments, **kwargs)
 
     def list_milestones(self, **kwargs):
         '''List all Milestones.
