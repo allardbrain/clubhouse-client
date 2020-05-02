@@ -16,6 +16,30 @@ class ClubhouseClient(object):
         self.ignored_status_codes = ignored_status_codes or []
         self.api_key = api_key
 
+    def get(self, *segments, **kwargs):
+        '''Included for backwards compatibility.
+        Not used in versions above 0.3.0.
+        '''
+        return self._request("get", *segments, **kwargs)
+
+    def post(self, *segments, **kwargs):
+        '''Included for backwards compatibility.
+        Not used in versions above 0.3.0.
+        '''
+        return self._request("post", *segments, **kwargs)
+
+    def put(self, *segments, **kwargs):
+        '''Included for backwards compatibility.
+        Not used in versions above 0.3.0.
+        '''
+        return self._request("put", *segments, **kwargs)
+
+    def delete(self, *segments, **kwargs):
+        '''Included for backwards compatibility.
+        Not used in versions above 0.3.0.
+        '''
+        return self._request("delete", *segments, **kwargs)
+
     def _request(self, method, data=None, *segments, **kwargs):
         '''An internal helper method for calling any endpoint.
 
