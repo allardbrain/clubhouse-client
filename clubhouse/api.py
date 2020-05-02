@@ -255,9 +255,9 @@ class ClubhouseClient(object):
         segments = ["milestones", id]
         return self._update_item(data, *segments, **kwargs)
 
-    #############
-    #  Actions  #
-    #############
+    ###############
+    #  Workflows  #
+    ###############
 
     def list_workflows(self, **kwargs):
         '''List all Workflows.
