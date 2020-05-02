@@ -12,7 +12,7 @@ python = "^3.7"
 requests = "^2.21"
 
 [tool.poetry.dev-dependencies]
-pytest = "^3.0"
+pytest = "^5.4.1"
 black = "^19.10b0"
 
 [build-system]
