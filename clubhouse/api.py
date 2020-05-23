@@ -277,6 +277,27 @@ class ClubhouseClient(object):
         segments = ["epics", epic_id, "comments", comment_id]
         return self._get_item(*segments, **kwargs)
 
+    def update_epic_comment(self, epic_id, comment_id, data, **kwargs):
+        '''Update a specific Comment on an Epic.
+        https://clubhouse.io/api/rest/v3/#Update-Epic-Comment
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.update_epic_comment(123)
+
+        Args:
+            epic_id (int): The Epic ID
+            comment_id (int): The Comment ID
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the updated Comment.
+        '''
+        segments = ["epics", epic_id, "comments", comment_id]
+        return self._update_item(data, *segments, **kwargs)
+
     ################
     #  Milestones  #
     ################
