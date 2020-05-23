@@ -482,6 +482,47 @@ class ClubhouseClient(object):
         segments = ["milestones", id]
         return self._update_item(data, *segments, **kwargs)
 
+
+    ###########
+    #  Teams  #
+    ###########
+
+    def list_teams(self, **kwargs):
+        '''List all Teams.
+        https://clubhouse.io/api/rest/v3/#List-Teams
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.list_teams()
+
+        Returns:
+            A list of dictionaries, where each dictionary is one Team, including
+            its workflow and states.
+        '''
+        segments = ["teams"]
+        return self._list_items(*segments, **kwargs)
+
+    def get_team(self, id, **kwargs):
+        '''Retrieve a specific Team.
+        https://clubhouse.io/api/rest/v3/#Get-Team
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.get_team(123)
+
+        Args:
+            id (int): The Team ID
+
+        Returns:
+            A JSON object containing information about the requested Team, its
+            workflow, and states.
+        '''
+        segments = ["teams", id]
+        return self._get_item(*segments, **kwargs)
+
+
     ###############
     #  Workflows  #
     ###############
