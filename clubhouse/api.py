@@ -319,6 +319,25 @@ class ClubhouseClient(object):
         segments = ["epics", epic_id, "comments", comment_id]
         return self._create_item(data, *segments, **kwargs)
 
+    def delete_epic_comment(self, epic_id, comment_id, **kwargs):
+        '''Delete a Comment on an Epic.
+        https://clubhouse.io/api/rest/v3/#Delete-Epic-Comment
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.delete_epic_comment(123)
+
+        Args:
+            epic_id (int): The Milestone ID
+            comment_id (int): The Comment ID
+
+        Returns:
+            An empty dictionary
+        '''
+        segments = ["epics", epic_id, "comments", comment_id]
+        return self._delete_item(*segments, **kwargs)
+
 
     ################
     #  Milestones  #
