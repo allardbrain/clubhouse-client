@@ -539,6 +539,26 @@ class ClubhouseClient(object):
         segments = ["projects", id]
         return self._get_item(*segments, **kwargs)
 
+    def update_project(self, id, data, **kwargs):
+        '''Update a specific Project.
+        https://clubhouse.io/api/rest/v3/#Update-Project
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.update_project(123, {'description': 'TEST'})
+
+        Args:
+            id (int): The Project ID
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the updated Project.
+        '''
+        segments = ["projects", id]
+        return self._update_item(data, *segments, **kwargs)
+
 
     ###########
     #  Teams  #
