@@ -502,6 +502,25 @@ class ClubhouseClient(object):
         segments = ["projects"]
         return self._list_items(*segments, **kwargs)
 
+    def create_project(self, data, **kwargs):
+        '''Create a Project.
+        https://clubhouse.io/api/rest/v3/#Create-Project
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.create_project({'name': 'TEST', 'team_id': 123})
+
+        Args:
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the new Project.
+        '''
+        segments = ["projects"]
+        return self._create_item(data, *segments, **kwargs)
+
 
     ###########
     #  Teams  #
