@@ -242,6 +242,22 @@ class ClubhouseClient(object):
         segments = ["epics", id, "comments"]
         return self._create_item(data, *segments, **kwargs)
 
+    def list_epic_comments(self, id, **kwargs):
+        '''List all Comments on an Epic.
+        https://clubhouse.io/api/rest/v3/#List-Epic-Comments
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.list_epic_comments(123)
+
+        Returns:
+            A list of dictionaries, where each dictionary is one Comment on the
+            Epic.
+        '''
+        segments = ["epics", id, "comments"]
+        return self._list_items(*segments, **kwargs)
+
 
     ################
     #  Milestones  #
