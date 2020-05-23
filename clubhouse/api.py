@@ -222,6 +222,26 @@ class ClubhouseClient(object):
         segments = ["epics", id]
         return self._update_item(data, *segments, **kwargs)
 
+    def create_epic_comment(self, id, data, **kwargs):
+        '''Create a Comment on an Epic.
+        https://clubhouse.io/api/rest/v3/#Create-Epic-Comment
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.create_epic_comment(123)
+
+        Args:
+            id (int): The Epic ID
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the new Comment.
+        '''
+        segments = ["epics", id, "comments"]
+        return self._create_item(data, *segments, **kwargs)
+
 
     ################
     #  Milestones  #
