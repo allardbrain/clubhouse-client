@@ -146,6 +146,27 @@ class ClubhouseClient(object):
         result = self._request("put", data, *segments, **kwargs)
         return result.json()
 
+
+    ###########
+    #  Epics  #
+    ###########
+
+    def list_epics(self, **kwargs):
+        '''List all Epics.
+        https://clubhouse.io/api/rest/v3/#List-Epics
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.list_epics()
+
+        Returns:
+            A list of dictionaries, where each dictionary is one Epic.
+        '''
+        segments = ["epics"]
+        return self._list_items(*segments, **kwargs)
+
+
     ################
     #  Milestones  #
     ################
