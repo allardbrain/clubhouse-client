@@ -202,6 +202,27 @@ class ClubhouseClient(object):
         segments = ["epics", id]
         return self._get_item(*segments, **kwargs)
 
+    def update_epic(self, id, data, **kwargs):
+        '''Update a specific Epic.
+        https://clubhouse.io/api/rest/v3/#Update-Epic
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.update_epic(123)
+
+        Args:
+            id (int): The Epic ID
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the updated Epic.
+        '''
+        segments = ["epics", id]
+        return self._update_item(data, *segments, **kwargs)
+
+
     ################
     #  Milestones  #
     ################
