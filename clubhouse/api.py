@@ -497,10 +497,30 @@ class ClubhouseClient(object):
             conn.list_teams()
 
         Returns:
-            A list of dictionaries, where each dictionary is one Team.
+            A list of dictionaries, where each dictionary is one Team, including
+            its workflow and states.
         '''
         segments = ["teams"]
         return self._list_items(*segments, **kwargs)
+
+    def get_team(self, id, **kwargs):
+        '''Retrieve a specific Team.
+        https://clubhouse.io/api/rest/v3/#Get-Team
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.get_team(123)
+
+        Args:
+            id (int): The Team ID
+
+        Returns:
+            A JSON object containing information about the requested Team, its
+            workflow, and states.
+        '''
+        segments = ["teams", id]
+        return self._get_item(*segments, **kwargs)
 
 
     ###############
