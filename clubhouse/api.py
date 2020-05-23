@@ -338,6 +338,24 @@ class ClubhouseClient(object):
         segments = ["epics", epic_id, "comments", comment_id]
         return self._delete_item(*segments, **kwargs)
 
+    def delete_epic(self, id, **kwargs):
+        '''Delete a specific Epic.
+        https://clubhouse.io/api/rest/v3/#Delete-Epic
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.delete_epic(123)
+
+        Args:
+            id (int): The Epic ID
+
+        Returns:
+            An empty dictionary
+        '''
+        segments = ["epics", id]
+        return self._delete_item(*segments, **kwargs)
+
     def list_epic_stories(self, id, **kwargs):
         '''List all Stories in an Epic.
         https://clubhouse.io/api/rest/v3/#List-Epic-Stories
