@@ -258,6 +258,24 @@ class ClubhouseClient(object):
         segments = ["epics", id, "comments"]
         return self._list_items(*segments, **kwargs)
 
+    def get_epic_comment(self, epic_id, comment_id, **kwargs):
+        '''Retrieve a specific Comment on an Epic.
+        https://clubhouse.io/api/rest/v3/#Get-Epic-Comment
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.get_epic_comment(123)
+
+        Args:
+            epic_id (int): The Epic ID
+            comment_id (int): The Comment ID
+
+        Returns:
+            A JSON object containing information about the requested Comment.
+        '''
+        segments = ["epics", epic_id, "comments", comment_id]
+        return self._get_item(*segments, **kwargs)
 
     ################
     #  Milestones  #
