@@ -146,6 +146,233 @@ class ClubhouseClient(object):
         result = self._request("put", data, *segments, **kwargs)
         return result.json()
 
+
+    ###########
+    #  Epics  #
+    ###########
+
+    def list_epics(self, **kwargs):
+        '''List all Epics.
+        https://clubhouse.io/api/rest/v3/#List-Epics
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.list_epics()
+
+        Returns:
+            A list of dictionaries, where each dictionary is one Epic.
+        '''
+        segments = ["epics"]
+        return self._list_items(*segments, **kwargs)
+
+    def create_epic(self, data, **kwargs):
+        '''Create an Epic.
+        https://clubhouse.io/api/rest/v3/#Create-Epic
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.create_epic({'name': 'TEST'})
+
+        Args:
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+        Returns:
+            A JSON object containing information about the new Epic.
+        '''
+        segments = ["epics"]
+        return self._create_item(data, *segments, **kwargs)
+
+    def get_epic(self, id, **kwargs):
+        '''Retrieve a specific Epic.
+        https://clubhouse.io/api/rest/v3/#Get-Epic
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.get_epic(123)
+
+        Args:
+            id (int): The Epic ID
+
+        Returns:
+            A JSON object containing information about the requested Epic.
+        '''
+        segments = ["epics", id]
+        return self._get_item(*segments, **kwargs)
+
+    def update_epic(self, id, data, **kwargs):
+        '''Update a specific Epic.
+        https://clubhouse.io/api/rest/v3/#Update-Epic
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.update_epic(123)
+
+        Args:
+            id (int): The Epic ID
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the updated Epic.
+        '''
+        segments = ["epics", id]
+        return self._update_item(data, *segments, **kwargs)
+
+    def create_epic_comment(self, id, data, **kwargs):
+        '''Create a Comment on an Epic.
+        https://clubhouse.io/api/rest/v3/#Create-Epic-Comment
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.create_epic_comment(123)
+
+        Args:
+            id (int): The Epic ID
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the new Comment.
+        '''
+        segments = ["epics", id, "comments"]
+        return self._create_item(data, *segments, **kwargs)
+
+    def list_epic_comments(self, id, **kwargs):
+        '''List all Comments on an Epic.
+        https://clubhouse.io/api/rest/v3/#List-Epic-Comments
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.list_epic_comments(123)
+
+        Returns:
+            A list of dictionaries, where each dictionary is one Comment on the
+            Epic.
+        '''
+        segments = ["epics", id, "comments"]
+        return self._list_items(*segments, **kwargs)
+
+    def get_epic_comment(self, epic_id, comment_id, **kwargs):
+        '''Retrieve a specific Comment on an Epic.
+        https://clubhouse.io/api/rest/v3/#Get-Epic-Comment
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.get_epic_comment(123)
+
+        Args:
+            epic_id (int): The Epic ID
+            comment_id (int): The Comment ID
+
+        Returns:
+            A JSON object containing information about the requested Comment.
+        '''
+        segments = ["epics", epic_id, "comments", comment_id]
+        return self._get_item(*segments, **kwargs)
+
+    def update_epic_comment(self, epic_id, comment_id, data, **kwargs):
+        '''Update a specific Comment on an Epic.
+        https://clubhouse.io/api/rest/v3/#Update-Epic-Comment
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.update_epic_comment(123)
+
+        Args:
+            epic_id (int): The Epic ID
+            comment_id (int): The Comment ID
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the updated Comment.
+        '''
+        segments = ["epics", epic_id, "comments", comment_id]
+        return self._update_item(data, *segments, **kwargs)
+
+    def create_epic_comment_comment(self, epic_id, comment_id, data, **kwargs):
+        '''Reply to a Comment on an Epic. (Create a Comment on a Comment.)
+        https://clubhouse.io/api/rest/v3/#Create-Epic-Comment-Comment
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.create_epic_comment_comment(123)
+
+        Args:
+            epic_id (int): The Epic ID
+            comment_id (int): The parent Comment ID
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the new Comment.
+        '''
+        segments = ["epics", epic_id, "comments", comment_id]
+        return self._create_item(data, *segments, **kwargs)
+
+    def delete_epic_comment(self, epic_id, comment_id, **kwargs):
+        '''Delete a Comment on an Epic.
+        https://clubhouse.io/api/rest/v3/#Delete-Epic-Comment
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.delete_epic_comment(123)
+
+        Args:
+            epic_id (int): The Milestone ID
+            comment_id (int): The Comment ID
+
+        Returns:
+            An empty dictionary
+        '''
+        segments = ["epics", epic_id, "comments", comment_id]
+        return self._delete_item(*segments, **kwargs)
+
+    def delete_epic(self, id, **kwargs):
+        '''Delete a specific Epic.
+        https://clubhouse.io/api/rest/v3/#Delete-Epic
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.delete_epic(123)
+
+        Args:
+            id (int): The Epic ID
+
+        Returns:
+            An empty dictionary
+        '''
+        segments = ["epics", id]
+        return self._delete_item(*segments, **kwargs)
+
+    def list_epic_stories(self, id, **kwargs):
+        '''List all Stories in an Epic.
+        https://clubhouse.io/api/rest/v3/#List-Epic-Stories
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.list_epic_stories(123)
+
+        Returns:
+            A list of dictionaries, where each dictionary is one Story in the
+            Epic.
+        '''
+        segments = ["epics", id, "stories"]
+        return self._list_items(*segments, **kwargs)
+
+
     ################
     #  Milestones  #
     ################
