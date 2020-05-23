@@ -166,6 +166,41 @@ class ClubhouseClient(object):
         segments = ["epics"]
         return self._list_items(*segments, **kwargs)
 
+    def create_epic(self, data, **kwargs):
+        '''Create an Epic.
+        https://clubhouse.io/api/rest/v3/#Create-Epic
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.create_epic({'name': 'TEST'})
+
+        Args:
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+        Returns:
+            A JSON object containing information about the new Epic.
+        '''
+        segments = ["epics"]
+        return self._create_item(data, *segments, **kwargs)
+
+    def get_epic(self, id, **kwargs):
+        '''Retrieve a specific Epic.
+        https://clubhouse.io/api/rest/v3/#Get-Epic
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.get_epic(123)
+
+        Args:
+            id (int): The Epic ID
+
+        Returns:
+            A JSON object containing information about the requested Epic.
+        '''
+        segments = ["epics", id]
+        return self._get_item(*segments, **kwargs)
 
     ################
     #  Milestones  #
