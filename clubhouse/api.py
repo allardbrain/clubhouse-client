@@ -521,6 +521,24 @@ class ClubhouseClient(object):
         segments = ["projects"]
         return self._create_item(data, *segments, **kwargs)
 
+    def get_project(self, id, **kwargs):
+        '''Retrieve a specific Project.
+        https://clubhouse.io/api/rest/v3/#Get-Project
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.get_project(123)
+
+        Args:
+            id (int): The Project ID
+
+        Returns:
+            A JSON object containing information about the requested Project.
+        '''
+        segments = ["projects", id]
+        return self._get_item(*segments, **kwargs)
+
 
     ###########
     #  Teams  #
