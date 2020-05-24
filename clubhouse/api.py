@@ -574,6 +574,24 @@ class ClubhouseClient(object):
         segments = ["projects", id, "stories"]
         return self._list_items(*segments, **kwargs)
 
+    def delete_project(self, id, **kwargs):
+        '''Delete a specific Project.
+        https://clubhouse.io/api/rest/v3/#Delete-Project
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.delete_project(123)
+
+        Args:
+            id (int): The Project ID
+
+        Returns:
+            An empty dictionary
+        '''
+        segments = ["projects", id]
+        return self._delete_item(*segments, **kwargs)
+
 
     ###########
     #  Teams  #
