@@ -483,6 +483,116 @@ class ClubhouseClient(object):
         return self._update_item(data, *segments, **kwargs)
 
 
+    ##############
+    #  Projects  #
+    ##############
+
+    def list_projects(self, **kwargs):
+        '''List all Projects.
+        https://clubhouse.io/api/rest/v3/#List-Projects
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.list_projects()
+
+        Returns:
+            A list of dictionaries, where each dictionary is one Project.
+        '''
+        segments = ["projects"]
+        return self._list_items(*segments, **kwargs)
+
+    def create_project(self, data, **kwargs):
+        '''Create a Project.
+        https://clubhouse.io/api/rest/v3/#Create-Project
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.create_project({'name': 'TEST', 'team_id': 123})
+
+        Args:
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the new Project.
+        '''
+        segments = ["projects"]
+        return self._create_item(data, *segments, **kwargs)
+
+    def get_project(self, id, **kwargs):
+        '''Retrieve a specific Project.
+        https://clubhouse.io/api/rest/v3/#Get-Project
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.get_project(123)
+
+        Args:
+            id (int): The Project ID
+
+        Returns:
+            A JSON object containing information about the requested Project.
+        '''
+        segments = ["projects", id]
+        return self._get_item(*segments, **kwargs)
+
+    def update_project(self, id, data, **kwargs):
+        '''Update a specific Project.
+        https://clubhouse.io/api/rest/v3/#Update-Project
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.update_project(123, {'description': 'TEST'})
+
+        Args:
+            id (int): The Project ID
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the updated Project.
+        '''
+        segments = ["projects", id]
+        return self._update_item(data, *segments, **kwargs)
+
+    def list_project_stories(self, id, **kwargs):
+        '''List all Stories belonging to a Project.
+        https://clubhouse.io/api/rest/v3/#List-Stories
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.list_project_stories(123)
+
+        Returns:
+            A list of dictionaries, where each dictionary is one Story.
+        '''
+        segments = ["projects", id, "stories"]
+        return self._list_items(*segments, **kwargs)
+
+    def delete_project(self, id, **kwargs):
+        '''Delete a specific Project.
+        https://clubhouse.io/api/rest/v3/#Delete-Project
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.delete_project(123)
+
+        Args:
+            id (int): The Project ID
+
+        Returns:
+            An empty dictionary
+        '''
+        segments = ["projects", id]
+        return self._delete_item(*segments, **kwargs)
+
+
     ###########
     #  Teams  #
     ###########
