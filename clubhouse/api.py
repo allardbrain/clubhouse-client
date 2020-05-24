@@ -559,6 +559,21 @@ class ClubhouseClient(object):
         segments = ["projects", id]
         return self._update_item(data, *segments, **kwargs)
 
+    def list_project_stories(self, id, **kwargs):
+        '''List all Stories belonging to a Project.
+        https://clubhouse.io/api/rest/v3/#List-Stories
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.list_project_stories(123)
+
+        Returns:
+            A list of dictionaries, where each dictionary is one Story.
+        '''
+        segments = ["projects", id, "stories"]
+        return self._list_items(*segments, **kwargs)
+
 
     ###########
     #  Teams  #
