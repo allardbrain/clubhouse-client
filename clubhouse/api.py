@@ -384,6 +384,7 @@ class ClubhouseClient(object):
         Example:
             from clubhouse import ClubhouseClient
             conn = ClubhouseClient(API_KEY)
+            conn.get_epic_workflow()
 
         Returns:
             A JSON object containing information about the requested Workflow.
