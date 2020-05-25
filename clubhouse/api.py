@@ -373,6 +373,25 @@ class ClubhouseClient(object):
         return self._list_items(*segments, **kwargs)
 
 
+    ###################
+    #  Epic-Workflow  #
+    ###################
+
+    def get_epic_workflow(self, **kwargs):
+        '''Retrieve the Epic Workflow for the Organization.
+        https://clubhouse.io/api/rest/v3/#Get-Epic-Workflow
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+
+        Returns:
+            A JSON object containing information about the requested Workflow.
+        '''
+        segments = ["epic-workflow"]
+        return self._get_item(*segments, **kwargs)
+
+
     ################
     #  Milestones  #
     ################
