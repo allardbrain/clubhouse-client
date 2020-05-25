@@ -613,6 +613,31 @@ class ClubhouseClient(object):
         return self._delete_item(*segments, **kwargs)
 
 
+    #############
+    #  Stories  #
+    #############
+
+    def create_story(self, data, **kwargs):
+        '''Create a Story.
+        https://clubhouse.io/api/rest/v3/#Create-Story
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.create_story({'name': 'TEST', 'project_id': 123})
+
+        Args:
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the new Story.
+        '''
+        segments = ["stories"]
+        return self._create_item(data, *segments, **kwargs)
+
+
+
     ###########
     #  Teams  #
     ###########
