@@ -721,6 +721,27 @@ class ClubhouseClient(object):
         segments = ["stories", id]
         return self._get_item(*segments, **kwargs)
 
+    def create_story_comment(self, id, data, **kwargs):
+        '''Create a Comment on a Story.
+        https://clubhouse.io/api/rest/v3/#Create-Comment
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.create_story_comment(123, {'text': 'TEST'})
+
+        Args:
+            id (int): The Story ID
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the new Comment.
+        '''
+        segments = ["stories", id, "comments"]
+        return self._create_item(data, *segments, **kwargs)
+
+
 
     ###########
     #  Teams  #
