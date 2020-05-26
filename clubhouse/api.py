@@ -703,6 +703,25 @@ class ClubhouseClient(object):
         segments = ["stories", "bulk"]
         return self._update_item(data, *segments, **kwargs)
 
+    def get_story(self, id, **kwargs):
+        '''Retrieve a specific Story.
+        https://clubhouse.io/api/rest/v3/#Get-Story
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.get_story(123)
+
+        Args:
+            id (int): The Story ID
+
+        Returns:
+            A JSON object containing information about the requested Story.
+        '''
+        segments = ["stories", id]
+        return self._get_item(*segments, **kwargs)
+
+
     ###########
     #  Teams  #
     ###########
