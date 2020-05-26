@@ -662,6 +662,25 @@ class ClubhouseClient(object):
         segments = ["stories", "bulk"]
         return self._create_item(data, *segments, **kwargs)
 
+    def update_story(self, id, data, **kwargs):
+        '''Update a specific Story.
+        https://clubhouse.io/api/rest/v3/#Update-Story
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.update_story(123, {'name': 'TEST'})
+
+        Args:
+            id (int): The Project ID
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the updated Story.
+        '''
+        segments = ["stories", id]
+        return self._update_item(data, *segments, **kwargs)
 
 
     ###########
