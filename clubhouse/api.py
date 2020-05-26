@@ -662,7 +662,7 @@ class ClubhouseClient(object):
         segments = ["stories", "bulk"]
         return self._create_item(data, *segments, **kwargs)
 
-    def update_story(self, id, data, **kwargs):
+    def update_story(self, data, **kwargs):
         '''Update a specific Story.
         https://clubhouse.io/api/rest/v3/#Update-Story
 
@@ -682,6 +682,26 @@ class ClubhouseClient(object):
         segments = ["stories", id]
         return self._update_item(data, *segments, **kwargs)
 
+    def update_multiple_stories(self, data, **kwargs):
+        '''Update multiple Stories.
+        https://clubhouse.io/api/rest/v3/#Update-Multiple-Stories
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.update_multiple_stories(
+                {'story_ids': [1, 2, 3], 'archived': False}
+            )
+
+        Args:
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the updated Stories.
+        '''
+        segments = ["stories", "bulk"]
+        return self._update_item(data, *segments, **kwargs)
 
     ###########
     #  Teams  #
