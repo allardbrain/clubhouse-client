@@ -760,6 +760,28 @@ class ClubhouseClient(object):
         segments = ["stories", story_id, "comments", comment_id]
         return self._get_item(*segments, **kwargs)
 
+    def update_story_comment(self, story_id, comment_id, data, **kwargs):
+        '''Update a specific Comment on a Story.
+        https://clubhouse.io/api/rest/v3/#Update-Comment
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.update_story_comment(123, 456, {'text': 'TEST'})
+
+        Args:
+            story_id (int): The Story ID
+            comment_id (int): The Comment ID
+            data (dict): Can contain any of the body parameters listed in the
+                API reference linked above as keys.
+
+        Returns:
+            A JSON object containing information about the updated Comment.
+        '''
+        segments = ["stories", story_id, "comments", comment_id]
+        return self._update_item(data, *segments, **kwargs)
+
+
 
     ###########
     #  Teams  #
