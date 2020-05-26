@@ -741,6 +741,24 @@ class ClubhouseClient(object):
         segments = ["stories", id, "comments"]
         return self._create_item(data, *segments, **kwargs)
 
+    def get_story_comment(self, story_id, comment_id, **kwargs):
+        '''Retrieve a specific Comment on a Story.
+        https://clubhouse.io/api/rest/v3/#Get-Comment
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.get_story_comment(123, 456)
+
+        Args:
+            story_id (int): The Story ID
+            comment_id (int): The Comment ID
+
+        Returns:
+            A JSON object containing information about the requested Comment.
+        '''
+        segments = ["stories", story_id, "comments", comment_id]
+        return self._get_item(*segments, **kwargs)
 
 
     ###########
