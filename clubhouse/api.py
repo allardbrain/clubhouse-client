@@ -636,6 +636,32 @@ class ClubhouseClient(object):
         segments = ["stories"]
         return self._create_item(data, *segments, **kwargs)
 
+    def create_multiple_stories(self, data, **kwargs):
+        '''Create multiple Stories.
+        https://clubhouse.io/api/rest/v3/#Create-Mulitple-Stories
+
+        Example:
+            from clubhouse import ClubhouseClient
+            conn = ClubhouseClient(API_KEY)
+            conn.create_multiple_stories({
+                'stories': [
+                    {'name': 'TEST 1', 'project_id': 123},
+                    {'name': 'TEST 2', 'project_id': 123},
+                ]
+            })
+
+        Args:
+            stories (list): A list of dictionaries, each containing information
+                about the Story it represents. Find allowable body parameters
+                here: https://clubhouse.io/api/rest/v3/#Body-Parameters-32252
+
+        Returns:
+            A list of JSON objects. Each JSON object represents one of the
+            new Stories.
+        '''
+        segments = ["stories", "bulk"]
+        return self._create_item(data, *segments, **kwargs)
+
 
 
     ###########
