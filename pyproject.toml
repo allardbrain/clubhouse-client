@@ -2,7 +2,7 @@
 name = "shortcut"
 version = "0.3.0"
 license = "Apache-2.0"
-description = "Client for the Clubhouse API"
+description = "Client for the Shortcut API"
 authors = ["Jean-Martin Archer <jm@jmartin.ca>"]
 readme = "README.md"
 repository = "https://github.com/j-martin/shortcut-client"
