@@ -6,7 +6,7 @@ Python client for Shortcut
 The package is available on [pypi](https://pypi.org/project/shortcut/) and can
 be installed like any other packages.
 
-    $ pip install shortcut
+    $ pip install shortcut # not currently published on pypi
 
 ## Usage
 
