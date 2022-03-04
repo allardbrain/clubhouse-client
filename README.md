@@ -1,22 +1,22 @@
-# clubhouse-client
-Python client for Clubhouse
+# shortcut-client
+Python client for Shortcut
 
 ## Installation
 
-The package is available on [pypi](https://pypi.org/project/clubhouse/) and can
+The package is available on [pypi](https://pypi.org/project/shortcut/) and can
 be installed like any other packages.
 
-    $ pip install clubhouse
+    $ pip install shortcut
 
 ## Usage
 
-Refer to [Clubhouse API Docs](https://clubhouse.io/api/rest/v2/) for more information.
+Refer to [Shortcut API Docs](https://shortcut.com/api/rest/v3) for more information.
 
 ```python
-from clubhouse import ClubhouseClient
+from shortcut import ShortcutClient
 
-clubhouse = ClubhouseClient('your api key')
+shortcut = ShortcutClient('your api key')
 
 story = {'name': 'A new story', 'description': 'Do something!'}
-clubhouse.post('stories', json=story)
+shortcut.post('stories', json=story)
 ```

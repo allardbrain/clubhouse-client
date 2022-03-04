@@ -7,20 +7,20 @@ from urllib.parse import urlparse
 
 import requests
 
-ENDPOINT_HOST = "https://api.clubhouse.io"
+ENDPOINT_HOST = "https://api.app.shortcut.com"
 ENDPOINT_PATH = "/api/v3"
 
-ClubhouseStory = Dict[str, object]
-ClubhouseUser = Dict[str, object]
-ClubhouseComment = Dict[str, str]
-ClubhouseTask = Dict[str, str]
-ClubhouseLabel = Dict[str, str]
-ClubhouseFile = Dict[str, str]
+ShortcutStory = Dict[str, object]
+ShortcutUser = Dict[str, object]
+ShortcutComment = Dict[str, str]
+ShortcutTask = Dict[str, str]
+ShortcutLabel = Dict[str, str]
+ShortcutFile = Dict[str, str]
 
-logger = logging.getLogger("clubhouse")
+logger = logging.getLogger("shortcut")
 
 
-class ClubhouseClient(object):
+class ShortcutClient(object):
     def __init__(self, api_key, ignored_status_codes=None):
         self.ignored_status_codes = ignored_status_codes or []
         self.api_key = api_key
